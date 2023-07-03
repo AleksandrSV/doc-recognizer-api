@@ -11,6 +11,11 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class YandexVisionApi {
+    /**
+     *
+     * @param content - закодированнае изображение в формате base64
+     * @return {@code }
+     */
     public ResponseEntity<String> recognition(String content) {
         try {
             HttpHeaders headers = new HttpHeaders();

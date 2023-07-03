@@ -1,7 +1,10 @@
 spring:
-  liquibase:
-    enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.xml
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://keycloak.yamakassi.ru/auth/realms/test/protocol/openid-connect/certs
+
   datasource:
     url: 'jdbc:postgresql://localhost:5432/doc_recognizer'
     username: 'admin'
@@ -12,8 +15,16 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: none
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
 server:
   port: 8081
+  jwt:
+    auth:
+      converter:
+        resource-id: test
+        principal-attribute: preferred_username
 logging:
   level:
     com.rowi.docrecognizerapi: DEBUG

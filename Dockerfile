@@ -17,8 +17,8 @@
 #CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "application.jar"]
 
 FROM maven:3.8.4-openjdk-17 AS build
-COPY src /home/app/src
 COPY pom.xml /home/app
+COPY src /home/app/src
 RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip=true
 
 
