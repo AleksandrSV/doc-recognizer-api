@@ -1,0 +1,55 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <!-- Создание таблицы doc -->
+    <changeSet id="create-table-doc" author="yamakassi">
+        <createTable tableName="doc">
+            <column name="id" type="BIGINT" >
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="file_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="global_company_id" type="BIGINT"/>
+            <column name="global_person_id" type="BIGINT"/>
+            <column name="deleted" type="BOOLEAN"/>
+            <column name="passport_id" type="BIGINT"/>
+
+        </createTable>
+    </changeSet>
+
+    <!-- Создание таблицы passport -->
+    <changeSet id="create-table-passport" author="yamakassi">
+        <createTable tableName="passport">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="surname" type="VARCHAR(255)"/>
+            <column name="middle_name" type="VARCHAR(255)"/>
+            <column name="birth_date" type="VARCHAR(255)"/>
+            <column name="birth_place" type="VARCHAR(255)"/>
+            <column name="number" type="VARCHAR(255)"/>
+            <column name="issued_by" type="VARCHAR(255)"/>
+            <column name="subdivision" type="VARCHAR(255)"/>
+            <column name="issue_date" type="VARCHAR(255)"/>
+            <column name="gender" type="VARCHAR(255)"/>
+            <column name="expiration_date" type="VARCHAR(255)"/>
+            <column name="citizenship" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Добавление внешнего ключа для связи с таблицей passport -->
+    <changeSet author="yamakassi" id="add_fk_constraint">
+        <addForeignKeyConstraint baseTableName="doc"
+                                 baseColumnNames="passport_id"
+                                 constraintName="fk_doc_passport"
+                                 referencedTableName="passport"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

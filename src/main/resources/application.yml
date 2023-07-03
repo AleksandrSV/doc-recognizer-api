@@ -1,0 +1,19 @@
+spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/doc_recognizer'
+    username: 'admin'
+    password: 'password'
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+server:
+  port: 8081
+logging:
+  level:
+    com.rowi.docrecognizerapi: DEBUG

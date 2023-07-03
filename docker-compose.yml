@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  doc_recognizer:
+    build:
+      context: .
+    container_name: doc-recognizer
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres_db
+    env_file:
+      .env
+  postgres_db:
+    image: "postgres:15"
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      .env
