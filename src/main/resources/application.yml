@@ -1,9 +1,4 @@
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: https://keycloak.yamakassi.ru/auth/realms/test/protocol/openid-connect/certs
 
   datasource:
     url: 'jdbc:postgresql://localhost:5432/doc_recognizer'
@@ -18,13 +13,26 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
+keycloak:
+  auth-server-url: https://keycloak.yamakassi.ru/auth
+  realm: "test"
+  resource: "test"
+  bearer-only: true
+  security-constraints:
+    - authRoles:
+        - ADMIN
+      securityCollections:
+        - patterns:
+            - /api/*
+    - auth-roles:
+        - USER
+        - ADMIN
+      security-collections:
+        - patterns:
+            - /recognize/passport/*
 server:
   port: 8081
-  jwt:
-    auth:
-      converter:
-        resource-id: test
-        principal-attribute: preferred_username
+
 logging:
   level:
     com.rowi.docrecognizerapi: DEBUG
