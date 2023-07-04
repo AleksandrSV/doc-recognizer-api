@@ -28,3 +28,6 @@ server:
 logging:
   level:
     com.rowi.docrecognizerapi: DEBUG
+yandexapi:
+  token: ${YANDEX_TOKEN_API}
+  folderId: ${YANDEX_FOLDER_ID}

@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "4ba63371-ca60-4cb6-b87d-4327bfdb4359",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20756574"
+	},
+	"item": [
+		{
+			"name": "recognizePassById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJtYUhJUWFiMW1OLVI0RFg5akRWRm5oQlBRd2E3N1RxVjhfN05pRzhQcXRnIn0.eyJleHAiOjE2ODg0MDg0OTEsImlhdCI6MTY4ODQwODE5MSwianRpIjoiYTI4ZjVhZDUtNjU0ZS00OWE1LWJkNjMtOWFiNDQwN2QyOTc5IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay55YW1ha2Fzc2kucnUvYXV0aC9yZWFsbXMvdGVzdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJlYjlkNDA0YS1hZjI2LTRhNDUtYWYyNS00N2M1NGY2NzA1MGEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ0ZXN0IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyInKiciLCJodHRwczovL3lhbWFrYXNzaS5ydSIsIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtdGVzdCIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InRlc3QiOnsicm9sZXMiOlsidW1hX3Byb3RlY3Rpb24iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImNsaWVudElkIjoidGVzdCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SG9zdCI6Ijg1LjI2LjIzMi4yNDAiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtdGVzdCIsImNsaWVudEFkZHJlc3MiOiI4NS4yNi4yMzIuMjQwIn0.FbkGkLhTBF510OUeHtC8MAWqJ1pyoX0MBFgeZR5MhxtIydp_34WgvnKNqq892HlEJuKdKuZLqTdVFFkq8KwNzai87usonZRinpQzKjcMTSay6K6UdUF7PiS8aj3LADm_KFslzwU2fWeIA1ctETXJ_9nWQhX4bj0N1cEAQ6j77PavJNrgSgGGjmmpQQ2oNHbOlBUA8QeW-4nV79-kvzYXDUQ3kXqAfQIm451rE3ndzjXa_MmoVkkz6XPjc0M_8At07raA7zd52Fg-TO1i-M1ZNsgkWr3s2CgTi734jpytCwL7Rxd7X34wf_jkw8QUMeBpef-UjOtlMBLI5hRG-ZuuFg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Au",
+						"value": "Api-Key AQVNxRwLjq1NjctY3cIOV9S-qy_UGkdTlnM2uVrk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fileId\":\"b9513c1f-b8ac-4192-a888-5084376ebe1e\",\n    \"orderId\": \"123333\",\n    \"globalCompanyId\": \"11\",\n    \"globalPersonId\": \"1\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8081/recognize/passport/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"recognize",
+						"passport",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "passportPages",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJtYUhJUWFiMW1OLVI0RFg5akRWRm5oQlBRd2E3N1RxVjhfN05pRzhQcXRnIn0.eyJleHAiOjE2ODg0MDg0OTEsImlhdCI6MTY4ODQwODE5MSwianRpIjoiYTI4ZjVhZDUtNjU0ZS00OWE1LWJkNjMtOWFiNDQwN2QyOTc5IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay55YW1ha2Fzc2kucnUvYXV0aC9yZWFsbXMvdGVzdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJlYjlkNDA0YS1hZjI2LTRhNDUtYWYyNS00N2M1NGY2NzA1MGEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ0ZXN0IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyInKiciLCJodHRwczovL3lhbWFrYXNzaS5ydSIsIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtdGVzdCIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InRlc3QiOnsicm9sZXMiOlsidW1hX3Byb3RlY3Rpb24iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImNsaWVudElkIjoidGVzdCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SG9zdCI6Ijg1LjI2LjIzMi4yNDAiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtdGVzdCIsImNsaWVudEFkZHJlc3MiOiI4NS4yNi4yMzIuMjQwIn0.FbkGkLhTBF510OUeHtC8MAWqJ1pyoX0MBFgeZR5MhxtIydp_34WgvnKNqq892HlEJuKdKuZLqTdVFFkq8KwNzai87usonZRinpQzKjcMTSay6K6UdUF7PiS8aj3LADm_KFslzwU2fWeIA1ctETXJ_9nWQhX4bj0N1cEAQ6j77PavJNrgSgGGjmmpQQ2oNHbOlBUA8QeW-4nV79-kvzYXDUQ3kXqAfQIm451rE3ndzjXa_MmoVkkz6XPjc0M_8At07raA7zd52Fg-TO1i-M1ZNsgkWr3s2CgTi734jpytCwL7Rxd7X34wf_jkw8QUMeBpef-UjOtlMBLI5hRG-ZuuFg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/recognize/passport/?orderId=123&page=1&size=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"recognize",
+						"passport",
+						""
+					],
+					"query": [
+						{
+							"key": "orderId",
+							"value": "123"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccessToketKeyCloak",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "Xps2pz7sYwtMQJFJWOKqjbBiw0fnVwaw",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "user@user.user",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "userpassword",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://keycloak.yamakassi.ru/auth/realms/test/protocol/openid-connect/token",
+					"protocol": "https",
+					"host": [
+						"keycloak",
+						"yamakassi",
+						"ru"
+					],
+					"path": [
+						"auth",
+						"realms",
+						"test",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJtYUhJUWFiMW1OLVI0RFg5akRWRm5oQlBRd2E3N1RxVjhfN05pRzhQcXRnIn0.eyJleHAiOjE2ODg0MDg0OTEsImlhdCI6MTY4ODQwODE5MSwianRpIjoiYTI4ZjVhZDUtNjU0ZS00OWE1LWJkNjMtOWFiNDQwN2QyOTc5IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay55YW1ha2Fzc2kucnUvYXV0aC9yZWFsbXMvdGVzdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJlYjlkNDA0YS1hZjI2LTRhNDUtYWYyNS00N2M1NGY2NzA1MGEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ0ZXN0IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyInKiciLCJodHRwczovL3lhbWFrYXNzaS5ydSIsIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtdGVzdCIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InRlc3QiOnsicm9sZXMiOlsidW1hX3Byb3RlY3Rpb24iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImNsaWVudElkIjoidGVzdCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SG9zdCI6Ijg1LjI2LjIzMi4yNDAiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtdGVzdCIsImNsaWVudEFkZHJlc3MiOiI4NS4yNi4yMzIuMjQwIn0.FbkGkLhTBF510OUeHtC8MAWqJ1pyoX0MBFgeZR5MhxtIydp_34WgvnKNqq892HlEJuKdKuZLqTdVFFkq8KwNzai87usonZRinpQzKjcMTSay6K6UdUF7PiS8aj3LADm_KFslzwU2fWeIA1ctETXJ_9nWQhX4bj0N1cEAQ6j77PavJNrgSgGGjmmpQQ2oNHbOlBUA8QeW-4nV79-kvzYXDUQ3kXqAfQIm451rE3ndzjXa_MmoVkkz6XPjc0M_8At07raA7zd52Fg-TO1i-M1ZNsgkWr3s2CgTi734jpytCwL7Rxd7X34wf_jkw8QUMeBpef-UjOtlMBLI5hRG-ZuuFg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"me"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

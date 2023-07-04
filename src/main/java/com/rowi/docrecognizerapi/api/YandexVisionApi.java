@@ -2,6 +2,7 @@ package com.rowi.docrecognizerapi.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rowi.docrecognizerapi.model.yandex_api.YandexCloudRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -11,6 +12,9 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class YandexVisionApi {
+    @Value("${yandexapi.token}")
+    private  String YANDEX_TOKEN_API;
+
     /**
      *
      * @param content - закодированнае изображение в формате base64
@@ -20,7 +24,7 @@ public class YandexVisionApi {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("Authorization", "Api-Key AQVNxRwLjq1NjctY3cIOV9S-qy_UGkdTlnM2uVrk");
+            headers.add("Authorization", "Api-Key "+ YANDEX_TOKEN_API);
 
             YandexCloudRequest yandexCloudRequest = new YandexCloudRequest();
             yandexCloudRequest.addContent(content);
