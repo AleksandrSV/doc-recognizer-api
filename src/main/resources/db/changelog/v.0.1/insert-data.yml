@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: "add-test-data-1"
+      author: "yamakassi"
+      changes:
+        - insert:
+            tableName: "passport"
+            columns:
+              - column:
+                  name: "id"
+                  value: "1"
+              - column:
+                  name: "name"
+                  value: "екатерина"
+              - column:
+                  name: "surname"
+                  value: "андреева"
+              - column:
+                  name: "middle_name"
+                  value: "валерьевна"
+              - column:
+                  name: "birth_date"
+                  value: "01.09.1983"
+              - column:
+                  name: "birth_place"
+                  value: "гор. тольятти самарской обл."
+              - column:
+                  name: "number"
+                  value: "3611480678"
+              - column:
+                  name: "issued_by"
+                  value: "отделением уфмс россии по самарской обл. в октябрьском районе г. самары"
+              - column:
+                  name: "subdivision"
+                  value: "630-010"
+              - column:
+                  name: "issue_date"
+                  value: "28.10.2011"
+              - column:
+                  name: "gender"
+                  value: "жен"
+              - column:
+                  name: "expiration_date"
+                  value: "-"
+              - column:
+                  name: "citizenship"
+                  value: "rus"
+        - insert:
+            tableName: "doc"
+            columns:
+              - column:
+                  name: "id"
+                  value: "1"
+              - column:
+                  name: "file_id"
+                  value: "c35544bb-243f-4681-9787-4fa6e3c3866c"
+              - column:
+                  name: "order_id"
+                  value: "123"
+              - column:
+                  name: "global_company_id"
+                  value: "456"
+              - column:
+                  name: "global_person_id"
+                  value: "1"
+              - column:
+                  name: "deleted"
+                  value: "false"
+              - column:
+                  name: "passport_id"
+                  value: "1"

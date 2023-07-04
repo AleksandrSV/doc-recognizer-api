@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "passport")
 public class PassportEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String name;

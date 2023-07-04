@@ -1,0 +1,95 @@
+databaseChangeLog:
+  - changeSet:
+        id: "create-table-doc"
+        author: "yamakassi"
+        changes:
+          - createTable:
+              tableName: "doc"
+              columns:
+                - column:
+                    name: "id"
+                    type: "BIGINT"
+                    constraints:
+                      nullable: false
+                      primaryKey: true
+                - column:
+                    name: "file_id"
+                    type: "UUID"
+                    constraints:
+                      nullable: false
+                - column:
+                    name: "order_id"
+                    type: "BIGINT"
+                    constraints:
+                      nullable: false
+                - column:
+                    name: "global_company_id"
+                    type: "BIGINT"
+                - column:
+                    name: "global_person_id"
+                    type: "BIGINT"
+                - column:
+                    name: "deleted"
+                    type: "BOOLEAN"
+                - column:
+                    name: "passport_id"
+                    type: "BIGINT"
+  - changeSet:
+      id: "create-table-passport"
+      author: "yamakassi"
+      changes:
+        - createTable:
+            tableName: "passport"
+            columns:
+              - column:
+                  name: "id"
+                  type: "BIGINT"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "name"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "surname"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "middle_name"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "birth_date"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "birth_place"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "number"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "issued_by"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "subdivision"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "issue_date"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "gender"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "expiration_date"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "citizenship"
+                  type: "VARCHAR(255)"
+  - changeSet:
+          author: "yamakassi"
+          id: "add_fk_constraint"
+          changes:
+            - addForeignKeyConstraint:
+                baseTableName: "doc"
+                baseColumnNames: "passport_id"
+                constraintName: "fk_doc_passport"
+                referencedTableName: "passport"
+                referencedColumnNames: "id"
