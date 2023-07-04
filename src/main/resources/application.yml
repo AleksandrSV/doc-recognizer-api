@@ -7,12 +7,34 @@ spring:
     username: 'admin'
     password: 'password'
     driver-class-name: org.postgresql.Driver
+
   jpa:
+    generate-ddl: true
     hibernate:
       ddl-auto: none
+
+keycloak:
+  auth-server-url: https://keycloak.yamakassi.ru/auth
+  realm: "test"
+  resource: "test"
+  bearer-only: true
+  security-constraints:
+    - authRoles:
+        - ADMIN
+      securityCollections:
+        - patterns:
+            - /api/*
+    - auth-roles:
+        - USER
+        - ADMIN
+      security-collections:
+        - patterns:
+            - /recognize/passport/*
+
 yandexapi:
   token: ${YANDEX_TOKEN_API}
   folderId: ${YANDEX_FOLDER_ID}
+
 server:
   port: 8081
 logging:

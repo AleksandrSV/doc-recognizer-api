@@ -14,6 +14,12 @@ import org.springframework.web.client.RestTemplate;
 public class YandexVisionApi {
     @Value("${yandexapi.token}")
     private  String YANDEX_TOKEN_API;
+
+    /**
+     *
+     * @param content - закодированнае изображение в формате base64
+     * @return {@code }
+     */
     public ResponseEntity<String> recognition(String content) {
         try {
             HttpHeaders headers = new HttpHeaders();
