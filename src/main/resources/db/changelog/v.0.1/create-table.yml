@@ -1,5 +1,19 @@
 databaseChangeLog:
   - changeSet:
+        id: "create-sequence-passport"
+        author: "yamakassi"
+        changes:
+          - createSequence:
+              sequenceName: "passport_id_seq"
+              startValue: 1
+              incrementBy: 1
+              minValue: 1
+          - createSequence:
+              sequenceName: "doc_id_seq"
+              startValue: 1
+              incrementBy: 1
+              minValue: 1
+  - changeSet:
         id: "create-table-doc"
         author: "yamakassi"
         changes:
@@ -12,6 +26,8 @@ databaseChangeLog:
                     constraints:
                       nullable: false
                       primaryKey: true
+                      defaultValueSequenceNext: "passport_id_seq"
+
                 - column:
                     name: "file_id"
                     type: "UUID"
@@ -47,6 +63,8 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
+                    defaultValueSequenceNext: "doc_id_seq"
+
               - column:
                   name: "name"
                   type: "VARCHAR(255)"
