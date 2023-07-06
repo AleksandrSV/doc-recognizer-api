@@ -24,18 +24,7 @@ keycloak:
   realm: "test"
   resource: "test"
   bearer-only: true
-  security-constraints:
-    - authRoles:
-        - ADMIN
-      securityCollections:
-        - patterns:
-            - /api/*
-    - auth-roles:
-        - USER
-        - ADMIN
-      security-collections:
-        - patterns:
-            - /recognize/passport/*
+
 
 yandexapi:
   token: ${YANDEX_TOKEN_API}

@@ -4,10 +4,7 @@ package com.rowi.docrecognizerapi.config;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.security.OAuthFlow;
-import io.swagger.v3.oas.models.security.OAuthFlows;
-import io.swagger.v3.oas.models.security.Scopes;
-import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.security.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +26,7 @@ public class OpenAPIConfig {
                 .title("Doc Recognizer API");
 
         return new OpenAPI().info(info).components(new Components()
-                .addSecuritySchemes(OAUTH_SCHEME_NAME, createOAuthScheme()));
+                .addSecuritySchemes(OAUTH_SCHEME_NAME, createOAuthScheme())).addSecurityItem(new SecurityRequirement().addList(OAUTH_SCHEME_NAME));
     }
 
     private SecurityScheme createOAuthScheme( ) {

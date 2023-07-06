@@ -19,6 +19,11 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 @KeycloakConfiguration
 @Import(KeycloakSpringBootConfigResolver.class)
 public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
+    protected static final String[] SWAGGER_WHITELIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+    };
     /**
      * Registers the KeycloakAuthenticationProvider with the authentication manager.
      */
@@ -47,7 +52,8 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http.cors().and().csrf().disable();
-        http.authorizeRequests().antMatchers("/api/*").hasRole("USER");
+        http.authorizeRequests().antMatchers(SWAGGER_WHITELIST).permitAll();
+        http.authorizeRequests().antMatchers("/recognize/*").hasRole("USER").anyRequest().authenticated();
       //  http.authorizeRequests().anyRequest().permitAll();
     }
 }
