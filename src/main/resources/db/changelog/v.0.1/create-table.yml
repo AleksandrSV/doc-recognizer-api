@@ -5,12 +5,12 @@ databaseChangeLog:
         changes:
           - createSequence:
               sequenceName: "passport_id_seq"
-              startValue: 1
+              startValue: 2
               incrementBy: 1
               minValue: 1
           - createSequence:
               sequenceName: "doc_id_seq"
-              startValue: 1
+              startValue: 2
               incrementBy: 1
               minValue: 1
   - changeSet:

@@ -10,7 +10,8 @@ import java.util.UUID;
 @Table(name = "doc")
 public class DocEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "doc_id_seq")
+    @SequenceGenerator(name = "doc", sequenceName = "doc_id_seq", allocationSize = 1)
     private Long id;
     @Column(name = "file_id")
     private UUID fileId;

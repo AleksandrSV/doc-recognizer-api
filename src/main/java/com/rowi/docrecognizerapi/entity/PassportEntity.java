@@ -9,7 +9,9 @@ import javax.persistence.*;
 @Table(name = "passport")
 public class PassportEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "passport_id_seq")
+    @SequenceGenerator(name = "passport", sequenceName = "passport_id_seq", allocationSize = 1)
+
     private Long id;
 
     private String name;

@@ -87,6 +87,7 @@ public class RecognizeController {
     @RequestMapping(value = "/passport/{fileId}", method = RequestMethod.PATCH)
     public ResponseEntity<DocResponse> redactPassport(@Parameter(description = "UUID fileId из uni-file-archive") @PathVariable UUID fileId, @RequestBody Doc doc) {
         DocResponse dr = docService.redactDock(fileId, doc);
+
         if(dr != null)
             return new ResponseEntity<>(dr, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
