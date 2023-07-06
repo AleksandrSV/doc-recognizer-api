@@ -6,6 +6,7 @@ import com.rowi.docrecognizerapi.model.Doc;
 import com.rowi.docrecognizerapi.model.request.PassportRequest;
 import com.rowi.docrecognizerapi.model.response.DocResponse;
 import com.rowi.docrecognizerapi.repository.DocRepository;
+import com.rowi.docrecognizerapi.repository.PassportRepository;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public class DocServiceImpl implements DocService{
     private final DocMapper docMapper;
     private final DocRepository docRepository;
+    private final PassportRepository passportRepository;
     private final Logger logger = LoggerFactory.getLogger(DocServiceImpl.class);
     @Override
     public DocResponse deleteDoc(UUID fileId) {
@@ -52,6 +54,7 @@ public class DocServiceImpl implements DocService{
         if(deo.isPresent()){
             DocEntity rde = docMapper.docToDocEntity(doc);
             rde.setId(deo.get().getId());
+            rde.getPassport().setId(deo.get().getPassport().getId());
             docRepository.save(rde);
             return docMapper.docEntityToDocResponse(rde);
         }else return null;

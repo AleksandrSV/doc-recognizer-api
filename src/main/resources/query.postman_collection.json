@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "4ba63371-ca60-4cb6-b87d-4327bfdb4359",
-		"name": "New Collection",
+		"_postman_id": "48176019-fb0b-4394-ac7f-d010cfe2d140",
+		"name": "New Collection Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20756574"
+		"_exporter_id": "27668156"
 	},
 	"item": [
 		{
@@ -35,6 +35,52 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"fileId\":\"c8ed6b83-7cc3-46c0-91b9-a5969817a139\",\n    \"orderId\": \"123333\",\n    \"globalCompanyId\": \"11\",\n    \"globalPersonId\": \"1\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8081/recognize/passport/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"recognize",
+						"passport",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recognizePassById Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwYjhaQ3lLVlRuMjJING83Qmh1S21fY2Q1OU9YMGVEQmJuMXRsaW5vUGpjIn0.eyJleHAiOjE2ODg0ODkzNDcsImlhdCI6MTY4ODQ4OTA0NywianRpIjoiYThjMWJkOTgtMWJmNi00ZTgxLThmYjItZmY4ZWI4YmNjMDg1IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay55YW1ha2Fzc2kucnUvYXV0aC9yZWFsbXMvdGVzdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIzNzQ0MWI4Ni0wOTMyLTRjZDgtYTBhOS1hNzE3MjA0NmZmMWUiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ0ZXN0Iiwic2Vzc2lvbl9zdGF0ZSI6Ijg2ZjlkZjUxLWJmNzctNDk0Yi1hOGNlLWJmMjE4ZmI5OTU3ZCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiJyonIiwiaHR0cHM6Ly95YW1ha2Fzc2kucnUiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtdGVzdCIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJVU0VSIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiODZmOWRmNTEtYmY3Ny00OTRiLWE4Y2UtYmYyMThmYjk5NTdkIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoicXdlcnQgcXdlcnQiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJxd2VydCIsImdpdmVuX25hbWUiOiJxd2VydCIsImZhbWlseV9uYW1lIjoicXdlcnQiLCJlbWFpbCI6InF3ZXJ0QHF3ZXJ0LnF3ZXJ0In0.M3ef3qS2b9aE8S2ldUkDbCynMsu29QkCZt6qT-PyjFZt7W6u_wRISIbfLdTRMIxGjOzgCIjhVjkQYBOdtUnmd5t7GGEPxp2Kjl41BwMIv8YKxjtd-dxm1fnYR887IMcjDPMojNOdW4xdtg6pJnr65FM5Xl7OFMQ4b0_bxvy2uNH-QYJlL0zUboxsuKDi2ersbSXZ6rfRPBvPssIHXkIDUnfkmcEWKgQUDADu8-7LK_O8GXNipcXOop1kiNFP369-w4PZiZo8mDnyGjIdAhc_7yiPvsuOxGS6sRnByVL2BDI94pqXg4no8z1UKmjWoegek8JWQfs5joGtCTO2qcDXQA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Au",
+						"value": "Api-Key AQVNxRwLjq1NjctY3cIOV9S-qy_UGkdTlnM2uVrk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"fileId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"orderId\": 0,\n  \"globalCompanyId\": 0,\n  \"globalPersonId\": 0,\n  \"deleted\": true,\n  \"passport\": {\n    \"name\": \"string\",\n    \"surname\": \"string\",\n    \"middleName\": \"string\",\n    \"birthDate\": \"string\",\n    \"birthPlace\": \"string\",\n    \"number\": \"string\",\n    \"issuedBy\": \"string\",\n    \"subdivision\": \"string\",\n    \"issueDate\": \"string\",\n    \"gender\": \"string\",\n    \"expirationDate\": \"string\",\n    \"citizenship\": \"string\"\n  }\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8081/recognize/passport/",
