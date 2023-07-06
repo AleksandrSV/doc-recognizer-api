@@ -7,6 +7,7 @@ import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurer
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
@@ -53,7 +54,8 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         super.configure(http);
         http.cors().and().csrf().disable();
         http.authorizeRequests().antMatchers(SWAGGER_WHITELIST).permitAll();
-        http.authorizeRequests().antMatchers("/recognize/*").hasRole("USER").anyRequest().authenticated();
+        http.authorizeRequests().antMatchers("/recognize/*").hasRole("USER");
+        http.authorizeRequests().antMatchers(HttpMethod.PATCH,"/recognize/passport/{fileId}").hasRole("ADMIN");
       //  http.authorizeRequests().anyRequest().permitAll();
     }
 }
