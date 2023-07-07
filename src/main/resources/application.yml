@@ -28,10 +28,15 @@ keycloak:
 
 services:
   uni-file-archive:
-    url:  "http://5.42.80.41:8080/uni-files/download/"
+    url: "http://5.42.80.41:8080/uni-files/download/"
   yandexapi:
     token: ${YANDEX_TOKEN_API}
     folderId: ${YANDEX_FOLDER_ID}
+  tests-env:
+    username: ${USERNAME}
+    password: ${PASSWORD}
+    client_id: ${CLIENT_ID}
+    client_secret: ${CLIENT_SECRET}
 
 server:
   port: 8081

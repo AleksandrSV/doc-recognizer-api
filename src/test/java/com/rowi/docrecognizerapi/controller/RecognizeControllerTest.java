@@ -6,18 +6,14 @@ import com.rowi.docrecognizerapi.model.Doc;
 import com.rowi.docrecognizerapi.model.Passport;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import java.util.HashMap;
-import java.util.Map;
-import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
-import io.restassured.response.ResponseBody;
-import io.restassured.response.ValidatableResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -32,6 +28,15 @@ import static org.hamcrest.Matchers.hasSize;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RequiredArgsConstructor
 public class RecognizeControllerTest {
+
+    @Value("${services.tests-env.username}")
+    private String username;
+    @Value("${services.tests-env.password}")
+    private String password;
+    @Value("${services.tests-env.client_id}")
+    private String client_id;
+    @Value("${services.tests-env.client_secret}")
+    private String client_secret;
 
     @LocalServerPort
     private Integer port;
@@ -49,6 +54,11 @@ public class RecognizeControllerTest {
         doc = new Doc();
         passport = new Passport();
         doc.setPassport(passport);
+        doc.setFileId(UUID.fromString("c35544bb-243f-4681-9787-4fa6e3c3866c"));
+        doc.setOrderId(0L);
+        doc.setGlobalPersonId(0L);
+        doc.setGlobalCompanyId(0L);
+        doc.setDeleted(false);
     }
 
     @AfterAll
@@ -70,7 +80,9 @@ public class RecognizeControllerTest {
 
     @Test
     void testJson() {
-        given()
+        String token = getToken();
+
+        given().with().auth().oauth2(token)
                 .contentType(ContentType.TEXT)
                 .when()
                 .get("/recognize/test_json")
@@ -88,7 +100,7 @@ public class RecognizeControllerTest {
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
                 .when()
-                .get("/recognize/passport/c8ed6b83-7cc3-46c0-91b9-a5969817a139")
+                .get("/recognize/passport/c35544bb-243f-4681-9787-4fa6e3c3866c")
                 .andReturn()
                 .then()
                 .statusCode(200);
@@ -123,7 +135,7 @@ public class RecognizeControllerTest {
         given().with().auth().oauth2(token)
                 .contentType(ContentType.JSON)
                 .when()
-                .delete("/recognize/passport/c8ed6b83-7cc3-46c0-91b9-a5969817a139")
+                .delete("/recognize/passport/c35544bb-243f-4681-9787-4fa6e3c3866c")
                 .andReturn()
                 .then()
                 .statusCode(200);
@@ -141,7 +153,7 @@ public class RecognizeControllerTest {
                 .contentType(ContentType.JSON)
                 .body(objJackson)
                 .when()
-                .patch("/recognize/passport/c8ed6b83-7cc3-46c0-91b9-a5969817a139")
+                .patch("/recognize/passport/c35544bb-243f-4681-9787-4fa6e3c3866c")
                 .andReturn()
                 .then()
                 .statusCode(200);
@@ -152,13 +164,13 @@ public class RecognizeControllerTest {
         RestAssured.baseURI = "https://keycloak.yamakassi.ru";
 
         Response response = given().with().auth().preemptive()
-                .basic("qwert@qwert.qwert", "qwert")
+                .basic(username, password)
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .formParam("grant_type", "password")
-                .formParam("client_id", "test")
-                .formParam("client_secret", "ZoHLbQVc9gSdd5e8D6akSDprTEFYg2wo")
-                .formParam("username", "qwert@qwert.qwert")
-                .formParam("password", "qwert")
+                .formParam("client_id", client_id)
+                .formParam("client_secret", client_secret)
+                .formParam("username", username)
+                .formParam("password", password)
                 .when()
                 .post("/auth/realms/test/protocol/openid-connect/token");
 

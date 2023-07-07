@@ -53,7 +53,8 @@ public class RecognizeController {
     @Operation(summary = "Распознавание паспорта", description = "Распознавание документов по fileId из uni-file-archive ")
     @RequestMapping(value = "/passport", method = RequestMethod.POST)
     public ResponseEntity<RecognizePassportResponse> recognizePassport(@RequestBody RecognizePassportRequest request) {
-       return recognizeService.recognizePassport(request);
+        if(request.getOrderId()==null || request.getFileId() == null) throw new IllegalArgumentException("The fileId and orderId fields cannot be empty");
+        return recognizeService.recognizePassport(request);
     }
     //2
     @Operation(summary = "Получение данных паспорта по fileId", description = "Получение  документа по fileId из uni-file-archive(только действующие документы)")
@@ -75,7 +76,7 @@ public class RecognizeController {
     })
     @RequestMapping(value = "/passport", method = RequestMethod.GET)
     public ResponseEntity<List<DocResponse>> passportPages(@ModelAttribute PassportRequest request, Pageable pageable) {
-        if(request.getOrderId()==null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if(request.getOrderId()==null) throw new IllegalArgumentException("The orderId field cannot be empty");
         List<DocResponse> docPages = docService.searchDocWithFilter(request,pageable).getContent();
         if(docPages.size()==0){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -86,8 +87,8 @@ public class RecognizeController {
     @Operation(summary = "Редактирование документа", description = "Редактирование документа по его fileID, если данные были неправильно распознаны")
     @RequestMapping(value = "/passport/{fileId}", method = RequestMethod.PATCH)
     public ResponseEntity<DocResponse> redactPassport(@Parameter(description = "UUID fileId из uni-file-archive") @PathVariable UUID fileId, @RequestBody Doc doc) {
+        if(doc.getOrderId()==null || doc.getFileId() == null) throw new IllegalArgumentException("The fileId and orderId fields cannot be empty");
         DocResponse dr = docService.redactDock(fileId, doc);
-
         if(dr != null)
             return new ResponseEntity<>(dr, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
