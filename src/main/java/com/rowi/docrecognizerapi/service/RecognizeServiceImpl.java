@@ -19,12 +19,16 @@ import lombok.AllArgsConstructor;
 import org.apache.commons.text.CaseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -35,6 +39,7 @@ public class RecognizeServiceImpl implements RecognizeService {
     private final YandexVisionApi yandexVisionApi;
     private final PassportMapper passportMapper;
     private final DocMapper docMapper;
+
 
     private final Logger logger = LoggerFactory.getLogger(RecognizeServiceImpl.class);
 
@@ -50,10 +55,8 @@ public class RecognizeServiceImpl implements RecognizeService {
             RecognizePassportResponse recognizePassportResponse = new RecognizePassportResponse(recognizeRequest.getFileId(), passport);
             return new ResponseEntity<>(recognizePassportResponse, HttpStatus.OK);
         }
-        // тут будет сервис который достает из хранилища а пока так
-        String url = "https://telegra.ph/file/35584c9c3ef0ff725d89a.jpg";
-        String base64Image = passportService.getEncodedPassportImage(url);
 
+            String base64Image = passportService.getEncodedPassportImage(recognizeRequest.getFileId());
         Passport pass = deserializeJson(yandexVisionApi.recognition(base64Image).getBody());
         RecognizePassportResponse recognizePass = new RecognizePassportResponse(recognizeRequest.getFileId(), pass);
         //сохранение данных в бд
@@ -61,6 +64,7 @@ public class RecognizeServiceImpl implements RecognizeService {
 
         return new ResponseEntity<>(recognizePass, HttpStatus.OK);
     }
+
 
     private Passport deserializeJson(String jsonString) {
         ObjectMapper objectMapper = new ObjectMapper();

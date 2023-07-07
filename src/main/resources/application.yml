@@ -26,9 +26,12 @@ keycloak:
   bearer-only: true
 
 
-yandexapi:
-  token: ${YANDEX_TOKEN_API}
-  folderId: ${YANDEX_FOLDER_ID}
+services:
+  uni-file-archive:
+    url:  "http://5.42.80.41:8080/uni-files/download/"
+  yandexapi:
+    token: ${YANDEX_TOKEN_API}
+    folderId: ${YANDEX_FOLDER_ID}
 
 server:
   port: 8081

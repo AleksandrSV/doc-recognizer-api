@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class YandexVisionApi {
-    @Value("${yandexapi.token}")
+    @Value("${services.yandexapi.token}")
     private  String YANDEX_TOKEN_API;
 
     /**
