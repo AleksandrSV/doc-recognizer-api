@@ -35,7 +35,6 @@ public class OpenAPIConfig {
 
         return new SecurityScheme()
                 .type(SecurityScheme.Type.OAUTH2)
-
                 .flows(flows);
     }
 

@@ -1,19 +1,19 @@
 package com.rowi.docrecognizerapi.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "passport")
 public class PassportEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "passport_id_seq")
-    @SequenceGenerator(name = "passport", sequenceName = "passport_id_seq", allocationSize = 1)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String surname;
     private String middleName;

@@ -1,18 +1,5 @@
 databaseChangeLog:
-  - changeSet:
-        id: "create-sequence-passport"
-        author: "yamakassi"
-        changes:
-          - createSequence:
-              sequenceName: "passport_id_seq"
-              startValue: 2
-              incrementBy: 1
-              minValue: 1
-          - createSequence:
-              sequenceName: "doc_id_seq"
-              startValue: 2
-              incrementBy: 1
-              minValue: 1
+
   - changeSet:
         id: "create-table-doc"
         author: "yamakassi"
@@ -22,12 +9,11 @@ databaseChangeLog:
               columns:
                 - column:
                     name: "id"
-                    type: "BIGINT"
+                    type: "SERIAL"
+                    startWith: 10
                     constraints:
                       nullable: false
                       primaryKey: true
-                      defaultValueSequenceNext: "passport_id_seq"
-
                 - column:
                     name: "file_id"
                     type: "UUID"
@@ -59,48 +45,49 @@ databaseChangeLog:
             columns:
               - column:
                   name: "id"
-                  type: "BIGINT"
+                  type: "SERIAL"
+                  startWith: 10
+
                   constraints:
                     primaryKey: true
                     nullable: false
-                    defaultValueSequenceNext: "doc_id_seq"
 
               - column:
                   name: "name"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
               - column:
                   name: "surname"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
               - column:
                   name: "middle_name"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
               - column:
                   name: "birth_date"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
               - column:
                   name: "birth_place"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
               - column:
                   name: "number"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
               - column:
                   name: "issued_by"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
               - column:
                   name: "subdivision"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
               - column:
                   name: "issue_date"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
               - column:
                   name: "gender"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
               - column:
                   name: "expiration_date"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
               - column:
                   name: "citizenship"
-                  type: "VARCHAR(255)"
+                  type: "VARCHAR"
   - changeSet:
           author: "yamakassi"
           id: "add_fk_constraint"

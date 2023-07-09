@@ -52,7 +52,7 @@ public class RecognizeController {
     //1
     @Operation(summary = "Распознавание паспорта", description = "Распознавание документов по fileId из uni-file-archive ")
     @RequestMapping(value = "/passport", method = RequestMethod.POST)
-    public ResponseEntity<RecognizePassportResponse> recognizePassport(@RequestBody RecognizePassportRequest request) {
+    public ResponseEntity<RecognizePassportResponse> recognizePassport( @RequestBody RecognizePassportRequest request) {
         if(request.getOrderId()==null || request.getFileId() == null) throw new IllegalArgumentException("The fileId and orderId fields cannot be empty");
         return recognizeService.recognizePassport(request);
     }
