@@ -11,10 +11,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-security:
-  config:
-    password-flow: true
-    authcode-flow: false
+
 keycloak:
   auth-server-url: https://keycloak.yamakassi.ru/auth
   realm: "test"
@@ -33,11 +30,6 @@ services:
     password: ${PASSWORD}
     client_id: ${CLIENT_ID}
     client_secret: ${CLIENT_SECRET}
-springdoc:
-  swagger-ui:
-    oauth:
-      client-id: "your-client-id-value"
-      client-secret: "your-client-secret-value"
 server:
   port: 8081
 logging:
