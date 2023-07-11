@@ -11,8 +11,7 @@
   - 1 . Для обращения к ендпоинтам следует выполнить запрос к keycloak на получение access токена
   <img src="readme-img/keycloak-get-access-token.png" alt="keycloak-get-access-token.png" width="900px">
   - 2 .  Далее полученный токен вставляем во вкладке authorization   и делаем запрос
-
-      <img src="readme-img/auth-img.png" alt="auth-img.png" width="800px">
+  <img src="readme-img/auth-img.png" alt="auth-img.png" width="800px">
   - 3 . Аналогично и с остальными методами 
 - запросы из swagger-ui (доступно по http://localhost:8081/swagger-ui/index.html)
     - авторизация пользователя для запросов
