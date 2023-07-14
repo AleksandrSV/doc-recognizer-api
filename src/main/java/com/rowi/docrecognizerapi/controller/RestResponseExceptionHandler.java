@@ -23,7 +23,7 @@ public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler
                 .body(new ErrorMessage(exception.getMessage()));
     }
     @ExceptionHandler(RestClientException.class)
-    public ResponseEntity<ErrorMessage> restClientException(NotFoundException exception) {
+    public ResponseEntity<ErrorMessage> restClientException(RestClientException exception) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorMessage("Упс! Что-то пошло не так. Пожалуйста, попробуйте позже."));
