@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 
 import java.util.Arrays;
 import java.util.Base64;
@@ -42,9 +43,8 @@ public class PassportServiceImpl implements PassportService{
             ResponseEntity<byte[]> response = restTemplate.build()
                     .exchange(url+fileId, HttpMethod.GET, entity, byte[].class);
             return  Base64.getEncoder().encodeToString(response.getBody());
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
+        } catch (RestClientException e) {
+            throw new RestClientException("uni-file-archive is not work");
         }
     }
 

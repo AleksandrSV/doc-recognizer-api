@@ -8,6 +8,7 @@ import com.rowi.docrecognizerapi.model.response.DocResponse;
 import com.rowi.docrecognizerapi.repository.DocRepository;
 import com.rowi.docrecognizerapi.repository.PassportRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -15,59 +16,62 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.ws.rs.NotFoundException;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
+@Slf4j
 @Service
 @AllArgsConstructor
-public class DocServiceImpl implements DocService{
+public class DocServiceImpl implements DocService {
     private final DocMapper docMapper;
     private final DocRepository docRepository;
     private final PassportRepository passportRepository;
-    private final Logger logger = LoggerFactory.getLogger(DocServiceImpl.class);
+
     @Override
     public DocResponse deleteDoc(UUID fileId) {
         Optional<DocEntity> deo = docRepository.findByFileIdWithPassport(fileId);
-        if(deo.isPresent()){
+        if (deo.isPresent()) {
             deo.get().setDeleted(true);
             docRepository.save(deo.get());
             return docMapper.docEntityToDocResponse(deo.get());
-        }else return null;
+        } else return null;
     }
 
     @Override
     public DocResponse searchDoc(UUID fileId) {
         Optional<DocEntity> doc = docRepository.findByFileIdNotDeleted(fileId);
 
-        if(doc.isPresent()){
+        if (doc.isPresent()) {
             System.out.println(doc.get());
-            return  docMapper.docEntityToDocResponse( doc.get());
+            return docMapper.docEntityToDocResponse(doc.get());
         } else {
-            return null;
+            throw new NotFoundException("Document with fileId  " +fileId.toString()+ " will not find");
         }
     }
 
     @Override
     public DocResponse redactDock(UUID fileId, Doc doc) {
         Optional<DocEntity> deo = docRepository.findByFileIdWithPassport(fileId);
-        if(deo.isPresent()){
+        if (deo.isPresent()) {
             DocEntity rde = docMapper.docToDocEntity(doc);
             rde.setId(deo.get().getId());
             rde.getPassport().setId(deo.get().getPassport().getId());
             docRepository.save(rde);
             return docMapper.docEntityToDocResponse(rde);
-        }else return null;
+        } else {
+            throw new NotFoundException("Document with fileId  " +fileId.toString()+ " does not exist");
+        }
     }
 
     @Override
     public Page<DocResponse> searchDocWithFilter(PassportRequest request, Pageable pageable) {
         Page<DocEntity> docEntities = docRepository
                 .findDocByFilters(request.getOrderId(), request.getGlobalCompanyId(), request.getGlobalPersonId(), pageable);
-        logger.debug("Page docentities {}", docEntities.getContent());
+        log.debug("Page docentities {}", docEntities.getContent());
         return new PageImpl<>(docEntities.stream()
-              .filter(doc -> !doc.getDeleted())
-              .map(docMapper::docEntityToDocResponse)
-              .collect(Collectors.toList()), docEntities.getPageable(), docEntities.getTotalElements());
+                .filter(doc -> !doc.getDeleted())
+                .map(docMapper::docEntityToDocResponse)
+                .collect(Collectors.toList()), docEntities.getPageable(), docEntities.getTotalElements());
     }
 }

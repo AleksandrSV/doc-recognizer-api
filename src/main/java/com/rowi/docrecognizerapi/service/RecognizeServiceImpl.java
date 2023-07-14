@@ -56,7 +56,7 @@ public class RecognizeServiceImpl implements RecognizeService {
             return new ResponseEntity<>(recognizePassportResponse, HttpStatus.OK);
         }
 
-            String base64Image = passportService.getEncodedPassportImage(recognizeRequest.getFileId());
+        String base64Image = passportService.getEncodedPassportImage(recognizeRequest.getFileId());
         Passport pass = deserializeJson(yandexVisionApi.recognition(base64Image).getBody());
         RecognizePassportResponse recognizePass = new RecognizePassportResponse(recognizeRequest.getFileId(), pass);
         //сохранение данных в бд

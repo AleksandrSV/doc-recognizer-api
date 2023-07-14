@@ -89,9 +89,7 @@ public class RecognizeController {
     public ResponseEntity<DocResponse> redactPassport(@Parameter(description = "UUID fileId из uni-file-archive") @PathVariable UUID fileId, @RequestBody Doc doc) {
         if(doc.getOrderId()==null || doc.getFileId() == null) throw new IllegalArgumentException("The fileId and orderId fields cannot be empty");
         DocResponse dr = docService.redactDock(fileId, doc);
-        if(dr != null)
-            return new ResponseEntity<>(dr, HttpStatus.OK);
-        else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(dr, HttpStatus.OK);
     }
     //5
     @Operation(summary = "Удаление данных документа", description = "При удалении в бд в поле deleted ставится true")
