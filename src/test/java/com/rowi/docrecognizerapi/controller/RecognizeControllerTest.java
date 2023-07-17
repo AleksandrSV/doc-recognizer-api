@@ -172,7 +172,7 @@ public class RecognizeControllerTest {
                 .formParam("username", username)
                 .formParam("password", password)
                 .when()
-                .post("/auth/realms/test/protocol/openid-connect/token");
+                .post("/realms/test/protocol/openid-connect/token");
 
         String responseBody = response.getBody().asString();
         setUp();

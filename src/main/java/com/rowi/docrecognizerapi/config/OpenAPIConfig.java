@@ -18,7 +18,7 @@ public class OpenAPIConfig {
     @Value("${keycloak.auth-server-url}")
     private String authUrl;
     private static final String TOKEN_URL_FORMAT = "%s/realms/%s/protocol/openid-connect/token";*/
-    String url = "https://keycloak.yamakassi.ru/auth/realms/test/protocol/openid-connect/token";
+    String url = "https://keycloak.yamakassi.ru/realms/test/protocol/openid-connect/token";
 
     @Bean
     public OpenAPI myOpenAPI() {

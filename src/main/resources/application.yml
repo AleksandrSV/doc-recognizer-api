@@ -13,7 +13,7 @@ spring:
       ddl-auto: none
 
 keycloak:
-  auth-server-url: https://keycloak.yamakassi.ru/auth
+  auth-server-url: https://keycloak.yamakassi.ru
   realm: "test"
   resource: "test"
   bearer-only: true
