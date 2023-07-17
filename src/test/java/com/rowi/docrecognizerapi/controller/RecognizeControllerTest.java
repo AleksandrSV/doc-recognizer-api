@@ -100,7 +100,7 @@ public class RecognizeControllerTest {
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
                 .when()
-                .get("/recognize/passport/c35544bb-243f-4681-9787-4fa6e3c3866c")
+                .get("/recognize/passport/?orderId=123&page=0&size=3")
                 .andReturn()
                 .then()
                 .statusCode(200);
@@ -112,9 +112,9 @@ public class RecognizeControllerTest {
 
         String body = "{\n" +
                 "  \"fileId\": \"c8ed6b83-7cc3-46c0-91b9-a5969817a159\",\n" +
-                "  \"orderId\": 0,\n" +
-                "  \"globalCompanyId\": 0,\n" +
-                "  \"globalPersonId\": 0\n" +
+                "  \"orderId\": 123,\n" +
+                "  \"globalCompanyId\": 456,\n" +
+                "  \"globalPersonId\": 12\n" +
                 "}";
 
         given().with().auth().oauth2(token)
