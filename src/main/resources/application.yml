@@ -1,21 +1,29 @@
 spring:
+  cloud:
+    vault:
+      enabled: false
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yml
   datasource:
-    url: 'jdbc:postgresql://localhost:5432/doc_recognizer'
-    username: 'admin'
-    password: 'password'
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/doc-recognizer-api
+    username: admin
+    password: password
 
   jpa:
-    hibernate:
-      ddl-auto: none
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    hibernate.ddl-auto: none
+    show-sql: true
+
+  jackson:
+    deserialization:
+      READ_UNKNOWN_ENUM_VALUES_AS_NULL: true
 
 keycloak:
   auth-server-url: https://keycloak.yamakassi.ru
-  realm: "test"
-  resource: "test"
+  realm: test
+  resource: test
   bearer-only: true
 
 

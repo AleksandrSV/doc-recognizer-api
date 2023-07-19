@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-        id: "add-tag-0.1"
-        author: "yamakassi"
-        changes:
-          - tagDatabase:
-              tag: "v.0.1"
+      id: "add-tag-0.1"
+      author: "yamakassi"
+      changes:
+        - tagDatabase:
+            tag: "v.0.1"
   - include:
       file: "create-table.yml"
       relativeToChangelogFile: true
