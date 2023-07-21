@@ -1,7 +1,7 @@
 package tech.rowi.rko.docrecognizerapi.service;
 
 import lombok.RequiredArgsConstructor;
-import org.webjars.NotFoundException;
+import org.springframework.http.ResponseEntity;
 import tech.rowi.rko.docrecognizerapi.entity.DocEntity;
 import tech.rowi.rko.docrecognizerapi.mapper.DocMapper;
 import tech.rowi.rko.docrecognizerapi.model.Doc;
@@ -9,7 +9,6 @@ import tech.rowi.rko.docrecognizerapi.model.request.PassportRequest;
 import tech.rowi.rko.docrecognizerapi.model.response.DocResponse;
 import tech.rowi.rko.docrecognizerapi.repository.DocRepository;
 import tech.rowi.rko.docrecognizerapi.repository.PassportRepository;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -38,28 +37,23 @@ public class DocServiceImpl implements DocService {
     }
 
     @Override
-    public DocResponse searchDoc(UUID fileId) {
+    public ResponseEntity<DocEntity> searchDoc(UUID fileId) {
         Optional<DocEntity> doc = docRepository.findByFileIdNotDeleted(fileId);
-
-        if (doc.isPresent()) {
-            System.out.println(doc.get());
-            return docMapper.docEntityToDocResponse(doc.get());
-        } else {
-            throw new NotFoundException("Document with fileId  " +fileId.toString()+ " will not find");
-        }
+        return ResponseEntity.of(doc);
+        
     }
 
     @Override
-    public DocResponse redactDock(UUID fileId, Doc doc) {
+    public ResponseEntity<DocResponse> redactDock(UUID fileId, Doc doc) {
         Optional<DocEntity> deo = docRepository.findByFileIdWithPassport(fileId);
         if (deo.isPresent()) {
             DocEntity rde = docMapper.docToDocEntity(doc);
             rde.setId(deo.get().getId());
             rde.getPassport().setId(deo.get().getPassport().getId());
             docRepository.save(rde);
-            return docMapper.docEntityToDocResponse(rde);
+            return ResponseEntity.of(Optional.of(docMapper.docEntityToDocResponse(rde)));
         } else {
-            throw new NotFoundException("Document with fileId  " +fileId.toString()+ " does not exist");
+            return ResponseEntity.of(Optional.empty());
         }
     }
 

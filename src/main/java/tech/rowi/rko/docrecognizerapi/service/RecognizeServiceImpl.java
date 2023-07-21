@@ -44,13 +44,13 @@ public class RecognizeServiceImpl implements RecognizeService {
      */
     @Override
     public ResponseEntity<RecognizePassportResponse> recognizePassport(RecognizePassportRequest recognizeRequest) {
-        //Проверка нет ли в бд уже документа
         Passport passport = passportService.findPassportByFileID(recognizeRequest.getFileId());
+        //Проверка нет ли в бд паспорта если есть возвращаем данные
         if (passport != null) {
             RecognizePassportResponse recognizePassportResponse = new RecognizePassportResponse(recognizeRequest.getFileId(), passport);
             return new ResponseEntity<>(recognizePassportResponse, HttpStatus.OK);
         }
-
+        //если паспорт не был найден в бд
         String base64Image = passportService.getEncodedPassportImage(recognizeRequest.getFileId());
         Passport pass = deserializeJson(yandexVisionApi.recognition(base64Image).getBody());
         RecognizePassportResponse recognizePass = new RecognizePassportResponse(recognizeRequest.getFileId(), pass);

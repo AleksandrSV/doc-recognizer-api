@@ -111,7 +111,7 @@ public class RecognizeControllerTest {
         String token = getToken();
 
         String body = "{\n" +
-                "  \"fileId\": \"c8ed6b83-7cc3-46c0-91b9-a5969817a159\",\n" +
+                "  \"fileId\": \"c4ed6b83-7cc3-46c0-91b9-a5969817a159\",\n" +
                 "  \"orderId\": 123,\n" +
                 "  \"globalCompanyId\": 456,\n" +
                 "  \"globalPersonId\": 12\n" +

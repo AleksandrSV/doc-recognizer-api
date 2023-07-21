@@ -1,5 +1,6 @@
 package tech.rowi.rko.docrecognizerapi.service;
 
+import org.springframework.http.ResponseEntity;
 import tech.rowi.rko.docrecognizerapi.model.Doc;
 import tech.rowi.rko.docrecognizerapi.model.request.PassportRequest;
 import tech.rowi.rko.docrecognizerapi.model.response.DocResponse;
@@ -11,9 +12,9 @@ import java.util.UUID;
 public interface DocService {
     DocResponse deleteDoc(UUID fileId);
 
-    DocResponse searchDoc(UUID fileId);
+    ResponseEntity searchDoc(UUID fileId);
 
-    DocResponse redactDock(UUID fileId, Doc doc);
+    ResponseEntity<DocResponse> redactDock(UUID fileId, Doc doc);
 
     Page<DocResponse> searchDocWithFilter(PassportRequest request, Pageable pageable);
 }

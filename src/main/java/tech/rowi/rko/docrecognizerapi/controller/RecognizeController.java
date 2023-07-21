@@ -1,6 +1,8 @@
 package tech.rowi.rko.docrecognizerapi.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.validation.annotation.Validated;
+import tech.rowi.rko.docrecognizerapi.entity.DocEntity;
 import tech.rowi.rko.docrecognizerapi.model.Doc;
 import tech.rowi.rko.docrecognizerapi.model.request.PassportRequest;
 import tech.rowi.rko.docrecognizerapi.model.request.RecognizePassportRequest;
@@ -30,6 +32,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/recognize")
 @RequiredArgsConstructor
+@Validated
 public class RecognizeController {
     private final RecognizeService recognizeService;
     private final DocService docService;
@@ -52,15 +55,14 @@ public class RecognizeController {
     //1
     @Operation(summary = "Распознавание паспорта", description = "Распознавание документов по fileId из uni-file-archive ")
     @RequestMapping(value = "/passport", method = RequestMethod.POST)
-    public ResponseEntity<RecognizePassportResponse> recognizePassport( @RequestBody RecognizePassportRequest request) {
-        if(request.getOrderId()==null || request.getFileId() == null) throw new IllegalArgumentException("The fileId and orderId fields cannot be empty");
+    public ResponseEntity<RecognizePassportResponse> recognizePassport(@Validated  @RequestBody RecognizePassportRequest request) {
         return recognizeService.recognizePassport(request);
     }
     //2
     @Operation(summary = "Получение данных паспорта по fileId", description = "Получение  документа по fileId из uni-file-archive(только действующие документы)")
     @RequestMapping(value = "/passport/{fileId}", method = RequestMethod.GET)
-    public ResponseEntity<DocResponse> recognizedPassport(@Parameter(description = "fileId из uni-file-archive") @PathVariable UUID fileId) {
-        return new ResponseEntity<>(docService.searchDoc(fileId),HttpStatus.OK);
+    public ResponseEntity<DocEntity> recognizedPassport(@Parameter(description = "fileId из uni-file-archive") @PathVariable UUID fileId) {
+        return docService.searchDoc(fileId);
     }
     //3 !ДОБАВИТЬ  PAGE
     /**
@@ -72,11 +74,10 @@ public class RecognizeController {
      */
     @Operation(summary = "Получение документов по фильтрам", description = "Список документов, отобранных по фильтрам, возвращается в виде объекта Page")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Успешный запрос", content = @Content(schema = @Schema(implementation = Page.class)))
+            @ApiResponse(responseCode = "200", description = "Успешный запрос", content = @Content(schema = @Schema(implementation = Pageable.class)))
     })
     @RequestMapping(value = "/passport", method = RequestMethod.GET)
-    public ResponseEntity<List<DocResponse>> passportPages(@ModelAttribute PassportRequest request, Pageable pageable) {
-        if(request.getOrderId()==null) throw new IllegalArgumentException("The orderId field cannot be empty");
+    public ResponseEntity<List<DocResponse>> passportPages(@Validated @ModelAttribute PassportRequest request, Pageable pageable) {
         List<DocResponse> docPages = docService.searchDocWithFilter(request,pageable).getContent();
         if(docPages.size()==0){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -86,10 +87,8 @@ public class RecognizeController {
     //4
     @Operation(summary = "Редактирование документа", description = "Редактирование документа по его fileID, если данные были неправильно распознаны")
     @RequestMapping(value = "/passport/{fileId}", method = RequestMethod.PATCH)
-    public ResponseEntity<DocResponse> redactPassport(@Parameter(description = "UUID fileId из uni-file-archive") @PathVariable UUID fileId, @RequestBody Doc doc) {
-        if(doc.getOrderId()==null || doc.getFileId() == null) throw new IllegalArgumentException("The fileId and orderId fields cannot be empty");
-        DocResponse dr = docService.redactDock(fileId, doc);
-        return new ResponseEntity<>(dr, HttpStatus.OK);
+    public ResponseEntity<DocResponse> redactPassport(@Parameter(description = "UUID fileId из uni-file-archive") @PathVariable UUID fileId,@Validated @RequestBody Doc doc) {
+        return docService.redactDock(fileId, doc);
     }
     //5
     @Operation(summary = "Удаление данных документа", description = "При удалении в бд в поле deleted ставится true")

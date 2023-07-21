@@ -12,6 +12,7 @@ services:
       .env
   postgres_db:
     image: "postgres:15"
+    container_name: doc-recognizer-api
     restart: always
     ports:
       - "5432:5432"
